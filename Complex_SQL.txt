@@ -33,7 +33,7 @@
     	-> FROM employees AS e
     	-> JOIN departments AS d
     	-> ON e.department_id =d.department_id
-    	-> WHERE e.salary > (select salary from employees where first_name = 'Alexis');
+    	-> WHERE e.salary > (select salary from employees where first_name = 'Alexis') AND d.department_name = 'shipping';
 
 6)	DISPLAY EMPLOYEE NUMBER, NAME,DEPT NUMBER, DEPT NAME, AND LOCATION
 
@@ -71,10 +71,19 @@
 
 10)	WRITE A SQL STATEMENT TO DISPLAY THE HIGHEST PAID EMPLOYEE'S (NAME, JOB, MANAGER NAME, SALARY AND DEPARTMENT NAME AND DEPARTMENT NO.) IN THE RESPECTIVE DEPARTMENT.
 	
-	SELECT e1.employee_id, e1.job_id, e2.first_name, max(e1.salary), d.department_name
+	SELECT e1.employee_id, e1.first_name AS employee_name, e1.job_id, e2.first_name AS manager_name, max(e1.salary), d.department_name
     	-> FROM employees AS e1
     	-> JOIN employees AS e2
     	-> ON e1.manager_id = e2.employee_id
     	-> JOIN departments AS d
     	-> ON e1.department_id = d.department_id
     	-> GROUP BY e1.department_id;
+
+11)	WRITE A SQL STATEMENT TO DISPLAY THE EMPLOYEE NAME (BOSS) AND NUMBER OF EMPLOYEE (SUBORDINATES) DIRECTLY REPORTING TO HIM?
+
+	SELECT e1.first_name AS manager, count(e2.employee_id) AS emp_count 		
+	-> FROM employees AS e1 
+	-> JOIN employees AS e2 
+	-> ON e2.manager_id = e1.employee_id 
+	-> GROUP BY e2.manager_id 
+	-> ORDER BY emp_count DESC;
