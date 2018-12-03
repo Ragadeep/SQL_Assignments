@@ -87,3 +87,17 @@
 	-> ON e2.manager_id = e1.employee_id 
 	-> GROUP BY e2.manager_id 
 	-> ORDER BY emp_count DESC;
+
+
+14)	 FIND THE 2ND MINIMUM SALARY OF THE EMPLOYEE.
+
+	SELECT max(salary)
+    	-> FROM employees
+    	-> WHERE salary < (SELECT max(salary)
+    	->                 FROM employees);
+
+15)	 FIND THE MAX 3 SALARIES FROM EMPLOYEE TABLE.
+
+	SELECT first_name, salary 
+	FROM employees 
+	ORDER BY salary DESC LIMIT 3;
