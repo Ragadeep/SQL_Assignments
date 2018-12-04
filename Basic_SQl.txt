@@ -186,8 +186,41 @@
    	FROM employees;
 
 49.	Display the name of all employees, and their bonus. Assume each Employee gets a bonus of 20 percent of his salary subject to the Maximum of Rs. 500.
+
+	SELECT first_name, if((salary*0.2)>500, 200, salary*0.2) max_500 
+	From employees;
+
 50.	Display the name of all employees, and their bonus. Assume each employee gets a bonus of 20 percent of his salary subject to the Maximum of Rs. 200.
+	
+	SELECT first_name, if((salary*0.2)>200, 200, salary*0.2) max_500
+    	From employees;
+	
 51.	For each employee display the number of days passed since the employee joined the company.
+
+	SELECT first_name, datediff(current_date, hire_date) no_of_days FROM employees;
+
 52.	For each employee display the number of months passed since the Employee joined the company.
+
+	SELECT first_name, timestampdiff(month, hire_date, current_date) no_of_months FROM employees;
+
 53.	Display the tenure of service in the years, months and days for all Employees in character format. Assume every month has 30 days.
 54.	Display the employee details in the following manner. 'Miler joined on the twenty-third of January of the year nineteen hundred and eighty Two'.
+
+55.	Display the details of all employees, sorted on the names.
+	
+	SELECT first_name
+    	FROM employees
+   	ORDER BY first_name ASc;
+
+56.	Display the name of all employees, based on their tenure, with the oldest employee coming first.
+
+	SELECT first_name, hire_date, datediff(current_date, hire_date) no_of_days
+   	FROM employees
+    	ORDER BY hire_date ASC;
+
+57.	Display the names, job and salary of all employees sorted on jobs and Salary.
+58.	Display the names, job and salary of all employees, sorted on jobs and within job, sorted on the descending order of salary.
+59.	Display the names, job and salary of all employees, sorted on Descending order of job and within job, sorted on the descending order of salary.
+60.	 Display the name, month and year of all employees, sorted on the month of their hire date irrespective of the year.
+61.	Display the name, month and year of joining of all employees, sorted on the month of their hire date, and within that on the year, with the earliest year appearing first.
+
