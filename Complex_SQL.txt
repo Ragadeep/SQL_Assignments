@@ -89,6 +89,29 @@
 	-> ORDER BY emp_count DESC;
 
 
+13)    CREATE THE FOLLOWING TABLES:
+
+       ORDER: {ID, ORDERDATE, ORDERNUMBER}
+
+       ORDER_ITEM: {ID, ORDERID, PRODUCTID, UNITPRICE, QUANTITY}
+
+       PRODUCT: {ID, PRODUCTNAME}
+
+       WRITE A QUERY TO DISPLAY THE FOLLOWING OUTPUT SORTED BY ORDER NO:
+
+	select o.order_number,o.order_date,i.quantity,i.unit_price,p.product_name
+
+	from orders o inner join order_item i
+
+	on o.order_id=i.order_id
+
+	inner join products p
+
+	on i.product_id=p.product_id
+
+	group by o.order_number;
+
+
 14)	 FIND THE 2ND MINIMUM SALARY OF THE EMPLOYEE.
 
 	SELECT max(salary)
@@ -101,3 +124,8 @@
 	SELECT first_name, salary 
 	FROM employees 
 	ORDER BY salary DESC LIMIT 3;
+
+
+16)	 DISPLAY COMMON RECORDS FROM EMP_1 & EMP_2 TABLES. (USE INTERSECT)
+
+select department_id from employees where department_id IN  (selectdepartment_id from department);

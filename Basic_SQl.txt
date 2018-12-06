@@ -225,7 +225,23 @@
    	ORDER BY salary, job_id;
 
 58.	Display the names, job and salary of all employees, sorted on jobs and within job, sorted on the descending order of salary.
+
+select last_name,job_id,salary from employees order by job_id  asc,salary desc;
+
+
+
 59.	Display the names, job and salary of all employees, sorted on Descending order of job and within job, sorted on the descending order of salary.
-60.	Display the name, month and year of all employees, sorted on the month of their hire date irrespective of the year.
+
+select last_name,job_id,salary from employees order by job_id  desc,salary desc;
+
+
+
+60.	 Display the name, month and year of all employees, sorted on the month of their hire date irrespective of the year.
+
+select last_name,month(hire_date),year(hire_date) from employees  order by month(hire_date);
+
+
+
 61.	Display the name, month and year of joining of all employees, sorted on the month of their hire date, and within that on the year, with the earliest year appearing first.
 
+select last_name,month(hire_date),year(hire_date) from employees  order by month(hire_date),year(hire_date);
