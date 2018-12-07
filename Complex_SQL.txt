@@ -1,92 +1,100 @@
 1)	WRITE A SQL STATEMENT TO DISPLAY THE LOWEST PAID EMPLOYEE'S (NAME , SALARY , DEPARTMENT NAME)
 
 	SELECT e.first_name, e.salary, d.department_name
-    	-> FROM employees AS e
-    	-> JOIN departments AS d
-    	-> ON e.department_id = d.department_id
-    	-> WHERE e.salary = (SELECT MIN(salary) FROM employees);
+    	FROM employees AS e
+    	JOIN departments AS d
+    	ON e.department_id = d.department_id
+    	WHERE e.salary = (SELECT MIN(salary) FROM employees);
 
 2)	LIST MINIMUM SALARY FOR EACH DEPARTMENT
 
 	SELECT department_id, MIN(salary)
-    	-> FROM employees
-    	-> GROUP BY department_id;
+    	FROM employees
+    	GROUP BY department_id;
 
 3)	WRITE A QUERY  BASED ON  FOLLOWING RESULT. 
 
 	SELECT e.employee_id, e.first_name, e.job_id, e.salary, e.department_id, d.department_name
-    	-> FROM employees AS e
-    	-> JOIN departments AS d
-    	-> ON e.department_id = d.department_id;
+    	FROM employees AS e
+    	JOIN departments AS d
+    	ON e.department_id = d.department_id;
 
 4)	LIST ALL THE EMPLOYEES WHO ARE WORKING IN shipping DEPARTMENT.
 
 	SELECT e.employee_id, e.first_name, e.job_id, e.hire_date, e.salary, e.department_id
-    	-> FROM employees AS e
-   	-> JOIN departments AS d
-    	-> ON e.department_id = d.department_id
-    	-> WHERE d.department_name = 'shipping';
+    	FROM employees AS e
+   	JOIN departments AS d
+    	ON e.department_id = d.department_id
+    	WHERE d.department_name = 'shipping';
 
 5)	LIST ALL EMPLOYEE WHO ARE WORKING IN shipping DEPARTMENT AND EARNING MORE THEN Alexis
 
 	SELECT e.employee_id, e.first_name, e.job_id, e.hire_date, e.salary, e.department_id
-    	-> FROM employees AS e
-    	-> JOIN departments AS d
-    	-> ON e.department_id =d.department_id
-    	-> WHERE e.salary > (select salary from employees where first_name = 'Alexis') AND d.department_name = 'shipping';
+    	FROM employees AS e
+    	JOIN departments AS d
+    	ON e.department_id =d.department_id
+    	WHERE e.salary > (select salary from employees where first_name = 'Alexis') AND d.department_name = 'shipping';
 
 6)	DISPLAY EMPLOYEE NUMBER, NAME,DEPT NUMBER, DEPT NAME, AND LOCATION
 
 	SELECT e.employee_id, e.first_name, e.department_id, d.department_name, l.city
-    	-> FROM employees AS e
-    	-> JOIN departments AS d
-    	-> ON e.department_id = d.department_id
-    	-> JOIN locations AS l
-    	-> ON d.location_id = l.location_id;
+    	FROM employees AS e
+    	JOIN departments AS d
+    	ON e.department_id = d.department_id
+    	JOIN locations AS l
+    	ON d.location_id = l.location_id;
 
 7)	DISPLAY THE FOLLOWING RESULT
 
 	SELECT e.department_id, d.department_name, e.first_name
-   	-> FROM employees AS e
-   	-> JOIN departments AS d
-    	-> ON e.department_id = d.department_id;
+   	FROM employees AS e
+   	JOIN departments AS d
+    	ON e.department_id = d.department_id;
 
 8)	LIST ALL THE EMPLOYEE WHO ARE WORKING IN Seattle
 
 	SELECT e.first_name, e.department_id, d.department_name, l.city
-    	-> FROM employees AS e
-    	-> JOIN departments AS d
-    	-> ON e.department_id = d.department_id
-    	-> JOIN locations AS l
-    	-> ON d.location_id = l.location_id
-    	-> WHERE l.city = 'Seattle';
+    	FROM employees AS e
+    	JOIN departments AS d
+    	ON e.department_id = d.department_id
+    	JOIN locations AS l
+    	ON d.location_id = l.location_id
+    	WHERE l.city = 'Seattle';
 
 9)	WRITE A SQL STATEMENT TO DISPLAY THE LOWEST PAID EMPLOYEE'S (NAME , SALARY , DEPARTMENT NAME) IN THE RESPECTIVE DEPARTMENT.
 
 	SELECT e.first_name, MIN(e.salary), d.department_name
-    	-> FROM employees AS e
-    	-> JOIN departments AS d
-    	-> ON e.department_id = d.department_id
-    	-> GROUP BY e.department_id;
+    	FROM employees AS e
+    	JOIN departments AS d
+    	ON e.department_id = d.department_id
+    	GROUP BY e.department_id;
 
 10)	WRITE A SQL STATEMENT TO DISPLAY THE HIGHEST PAID EMPLOYEE'S (NAME, JOB, MANAGER NAME, SALARY AND DEPARTMENT NAME AND DEPARTMENT NO.) IN THE RESPECTIVE DEPARTMENT.
 	
 	SELECT e1.employee_id, e1.first_name AS employee_name, e1.job_id, e2.first_name AS manager_name, max(e1.salary), d.department_name
-    	-> FROM employees AS e1
-    	-> JOIN employees AS e2
-    	-> ON e1.manager_id = e2.employee_id
-    	-> JOIN departments AS d
-    	-> ON e1.department_id = d.department_id
-    	-> GROUP BY e1.department_id;
+    	FROM employees AS e1
+    	JOIN employees AS e2
+    	ON e1.manager_id = e2.employee_id
+    	JOIN departments AS d
+    	ON e1.department_id = d.department_id
+    	GROUP BY e1.department_id;
 
 11)	WRITE A SQL STATEMENT TO DISPLAY THE EMPLOYEE NAME (BOSS) AND NUMBER OF EMPLOYEE (SUBORDINATES) DIRECTLY REPORTING TO HIM?
 
 	SELECT e1.first_name AS manager, count(e2.employee_id) AS emp_count 		
-	-> FROM employees AS e1 
-	-> JOIN employees AS e2 
-	-> ON e2.manager_id = e1.employee_id 
-	-> GROUP BY e2.manager_id 
-	-> ORDER BY emp_count DESC;
+	FROM employees AS e1 
+	JOIN employees AS e2 
+	ON e2.manager_id = e1.employee_id 
+	GROUP BY e2.manager_id 
+	ORDER BY emp_count DESC;
+
+12)	DISPLAY THE NAMES, DESIGNATION AND SALARIES OF ALL EMPLOYEES WHO HAVE MANAGER ALONG WITH MANAGER'S NAME, DESIGNATION AND MANAGER'S SALARY.
+	(SELF-JOIN)
+
+	SELECT e1.first_name, e1.job_id, e1.salary, e2.first_name AS manager_name, e2.job_id AS manager_designation, e2.salary AS manager_salary
+   	FROM employees AS e1
+   	JOIN employees AS e2
+    	ON e1.manager_id = e2.employee_id;
 
 
 13)    CREATE THE FOLLOWING TABLES:
@@ -115,9 +123,9 @@
 14)	 FIND THE 2ND MINIMUM SALARY OF THE EMPLOYEE.
 
 	SELECT max(salary)
-    	-> FROM employees
-    	-> WHERE salary < (SELECT max(salary)
-    	->                 FROM employees);
+    	FROM employees
+    	WHERE salary < (SELECT max(salary)
+                     FROM employees);
 
 15)	 FIND THE MAX 3 SALARIES FROM EMPLOYEE TABLE.
 
@@ -128,4 +136,13 @@
 
 16)	 DISPLAY COMMON RECORDS FROM EMP_1 & EMP_2 TABLES. (USE INTERSECT)
 
-select department_id from employees where department_id IN  (selectdepartment_id from department);
+	SELECT department_id 
+	FROM employees 
+	WHERE department_id IN  (selectdepartment_id from department);
+
+17)	 DISPLAY DEPARTMENT NO WISE TOTAL SALARY WHERE MORE THAN 2 EMPLOYEES EXIST IN A DEPARTMENT.
+
+	SELECT department_id,sum(salary) 
+	FROM employees 
+	GROUP BY department_id 
+	HAVING count(employee_id)>2;
